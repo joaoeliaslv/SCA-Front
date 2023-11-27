@@ -1,0 +1,18 @@
+<div class="h-100 w-100 bg-primary d-flex align-items-center justify-content-center">
+  <div class="card p-4 pl-5 pr-5 position-relative">
+    <h3 class="font-weight-bold text-align-center text-primary">SCA</h3>
+    <h3 class="text-align-center mt-n3">Sistema de Cartão de Autógrafo</h3>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Usuário</mat-label>
+      <input #inputUsuario matInput>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Senha</mat-label>
+      <input #inputSenha matInput (keydown.enter)="onEntrar(inputUsuario.value, inputSenha.value)" type="password">
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="onEntrar(inputUsuario.value, inputSenha.value)">Entrar</button>
+  </div>
+
+</div>

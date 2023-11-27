@@ -1,0 +1,27 @@
+@import '../../styles'
+
+::ng-deep
+  .ngx-pagination
+    padding-left: 0 !important
+    margin-right: auto !important
+    margin-left: auto !important
+
+  .ngx-pagination .current
+    background-color: transparent !important
+
+  .ngx-pagination .current span
+    @extend .btn
+    @extend .btn-primary
+
+  .ngx-pagination li a
+    color: black !important
+    @extend .btn
+    @extend .btn-outline-primary
+
+  .ngx-pagination li a:hover
+    color: white !important
+
+  .ngx-pagination .disabled span
+    @extend .btn
+    @extend .btn-primary
+    @extend .disabled

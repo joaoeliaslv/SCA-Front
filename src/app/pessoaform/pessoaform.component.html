@@ -1,0 +1,126 @@
+<form [formGroup]="form" (ngSubmit)="onSalvar()" autocomplete="off"
+      class="mw-100 w-100 d-flex flex-column p-3 h-100 mh-100 overflow-auto bg-white position-relative">
+  <input #assInput type="file" class="d-none" (change)="onAssChange($event)">
+  <div class="m-2 mb-3 d-flex flex-row justify-content-between">
+    <button routerLink="/listapessoas" type="button" class="btn btn-outline-primary">Voltar para a Lista</button>
+    <div class="d-flex flex-row">
+      <button *ngIf="pessoa" class="btn btn-outline-danger d-flex flex-row mr-3" type="button" (click)="onExcluir()"><i class="material-icons">delete</i>Excluir Pessoa</button>
+      <button mat-raised-button type="button" [hidden]="!pessoa" (click)="onGerarPDF()" class="btn mr-3 btn-primary">Visualizar Modelo</button>
+      <button mat-raised-button type="submit" [disabled]="form.pristine || form.invalid"
+              class="btn btn-success">{{pessoa ? 'Salvar Alterações' : 'Cadastrar Pessoa'}}</button>
+    </div>
+  </div>
+
+  <div class="d-flex flex-column align-items-start justify-content-start mr-2 w-100">
+    <span class="bigfont text-primary ml-2 bg-white unselectable app-outline-label"> Informações Civis </span>
+    <div class="d-flex flex-column app-outline-primary pt-3 pl-3 pr-3 pb-2 w-100">
+      <div class="w-100 d-flex flex-row justify-content-start">
+        <mat-form-field class="mr-4" *ngIf="pessoa">
+          <mat-label class="fontnome">Nº Ordem</mat-label>
+          <input matInput type="number" formControlName="ficha">
+        </mat-form-field>
+        <mat-form-field class="mr-4">
+          <mat-label class="fontnome">Data de Emissão</mat-label>
+          <input matInput formControlName="dataEmissao" [matDatepicker]="dataEmissaoPicker">
+          <mat-datepicker-toggle matSuffix [for]="dataEmissaoPicker"></mat-datepicker-toggle>
+          <mat-datepicker #dataEmissaoPicker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="mr-4 flex-grow-1">
+          <mat-label class="fontnome">CPF</mat-label>
+          <input matInput [mask]="cpfmask" formControlName="cpf">
+        </mat-form-field>
+        <mat-form-field class="flex-grow-1">
+          <mat-label class="fontnome">Registro Geral</mat-label>
+          <input matInput formControlName="rg">
+        </mat-form-field>
+      </div>
+      <div class="w-100 d-flex flex-row justify-content-end">
+        <mat-form-field class="mr-4 flex-grow-1">
+          <mat-label class="fontnome">Nome</mat-label>
+          <input matInput formControlName="nome">
+        </mat-form-field>
+        <mat-form-field class="mr-4">
+          <mat-label class="fontnome">Data de Nascimento</mat-label>
+          <input matInput formControlName="dataNasc" [matDatepicker]="dataNascPicker">
+          <mat-datepicker-toggle matSuffix [for]="dataNascPicker"></mat-datepicker-toggle>
+          <mat-datepicker #dataNascPicker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="mr-4">
+          <mat-label class="fontnome">Profissão</mat-label>
+          <input matInput formControlName="profissao">
+        </mat-form-field>
+        <mat-form-field class="">
+          <mat-label class="fontnome">Estado Civil</mat-label>
+          <input matInput formControlName="estadocivil">
+        </mat-form-field>
+      </div>
+      <div class="d-flex flex-row">
+        <mat-form-field class="mr-4 flex-grow-1">
+          <mat-label class="fontnome">Pai</mat-label>
+          <input matInput formControlName="pai">
+        </mat-form-field>
+        <mat-form-field class="flex-grow-1">
+          <mat-label class="fontnome">Mãe</mat-label>
+          <input matInput formControlName="mae">
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex flex-column align-items-start justify-content-start flex-grow-1 w-100 mt-3">
+    <span class="bigfont text-primary ml-2 bg-white unselectable app-outline-label"> Endereço </span>
+    <div class="d-flex flex-column app-outline-primary pt-3 pl-3 pr-3 pb-2 w-100">
+
+      <div class="d-flex flex-row w-100">
+        <mat-form-field class="mr-4 flex-grow-1">
+          <mat-label class="fontnome">Rua</mat-label>
+          <input matInput formControlName="enderecoRua">
+        </mat-form-field>
+        <mat-form-field class="mr-4" style="flex-grow: 0.5">
+          <mat-label class="fontnome">Bairro</mat-label>
+          <input matInput formControlName="enderecoBairro">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label class="fontnome">Número</mat-label>
+          <input matInput formControlName="enderecoNumero">
+        </mat-form-field>
+      </div>
+
+      <div class="d-flex flex-row w-100">
+        <mat-form-field class="flex-grow-1 mr-4">
+          <mat-label class="fontnome">Complemento</mat-label>
+          <input matInput formControlName="enderecoComplemento">
+        </mat-form-field>
+        <mat-form-field class="mr-4" style="flex-grow: 0.5">
+          <mat-label class="fontnome">Cidade</mat-label>
+          <input matInput type="text" formControlName="enderecoCidade" autocomplete="autocomplete_off_hack_xfr4!k"
+                 [matAutocomplete]="autoCidade">
+          <mat-autocomplete #autoCidade [autoActiveFirstOption]="true">
+            <mat-option *ngFor="let cidade of cidadesFiltradas | async" [value]="cidade.nome">
+              {{cidade.nome}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+        <mat-form-field class="">
+          <mat-label class="fontnome">Estado</mat-label>
+          <input matInput type="text" formControlName="enderecoEstado" autocomplete="autocomplete_off_hack_xfr4!k"
+                 [matAutocomplete]="autoEstado">
+          <mat-autocomplete #autoEstado [autoActiveFirstOption]="true">
+            <mat-option *ngFor="let estado of estadosFiltrados | async" [value]="estado.sigla">
+              {{estado.sigla}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="d-flex flex-column align-items-start justify-content-start mr-2 mt-3 w-100">
+      <span class="bigfont text-primary ml-2 bg-white unselectable app-outline-label"> Dados Cadastrados </span>
+      <div class="ass-container app-outline-primary p-2 pb-3 pt-3 d-flex justify-content-center align-items-center position-relative">
+        <img *ngIf="assinatura && !asspdf" [src]="processedAss" alt="Dados da Pessoa">
+        <pdf-viewer *ngIf="assinatura && asspdf" [src]="assinatura" [autoresize]="true" [show-borders]="true"></pdf-viewer>
+        <h3 *ngIf="!assinatura">Dados não foram cadastrados.</h3>
+        <button type="button" (click)="onClickEditImg(assInput)" class="position-absolute top-right-absolute mr-2 mt-2 btn btn-primary" mat-icon-button><i class="material-icons">edit</i></button>
+      </div>
+    </div>
+  </div>
+</form>

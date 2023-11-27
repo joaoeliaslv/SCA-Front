@@ -1,0 +1,12 @@
+<div class="mw-100 mh-100 h-100 d-flex flex-column justify-content-between">
+  <div (resized)="onResized($event)" class="mh-100 h-100 w-100 position-relative" style="overflow: auto">
+    <app-pessoa *ngFor="let pessoa of pessoas | paginate: {itemsPerPage: tamanhoPagina, currentPage: paginaAtual, totalItems: quantTotal}" [pessoa]="pessoa"></app-pessoa>
+  </div>
+
+  <div class="w-100 d-flex align-items-center justify-content-center position-relative">
+    <pagination-controls class="mb-n2" (pageChange)="onPageChange($event)"
+                        nextLabel="Próximo" previousLabel="Anterior"></pagination-controls>
+    <button mat-button routerLink="/novapessoa" class="btn btn-primary mr-3 position-absolute right-absolute"><i class="material-icons">add_box</i>Cadastrar Pessoa</button>
+  </div>
+</div>
+

@@ -1,0 +1,6 @@
+<div class="d-flex flex-row align-items-center" [ngStyle]="{'width': width}">
+  <mat-form-field class="flex-grow-1 field-white">
+    <input #searchInput (input)="onSearch(searchInput)" (change)="onSearchEnter(searchInput)" matInput type="search" class="text-white" autocomplete="off">
+  </mat-form-field>
+  <button (click)="onClear(searchInput)" mat-icon-button class="btn btn-light ml-2"><i class="material-icons text-primary">clear</i></button>
+</div>

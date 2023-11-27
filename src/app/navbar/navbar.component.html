@@ -1,0 +1,25 @@
+<div class="bg-primary" [hidden]="escondido">
+  <div class="bg-primary d-flex align-items-center justify-content-between app-navbar p-1" [ngStyle]="{'visibility': (escondido) ? 'hidden' : 'visible'}">
+    <div class="d-flex flex-row w-100 align-items-center">
+      <a class="text-white ml-3 mr-2 homelink d-flex align-items-center" routerLink="/paginainicial"><i class="material-icons mr-1">home</i>Página Inicial</a>
+      <div class="d-flex flex-row align-items-center h-100 ml-auto mr-auto" *ngIf="router.url === '/listapessoas'">
+        <mat-form-field class="m-3 opcoes-container select-white">
+          <mat-select [(value)]="opcaoAtual">
+            <mat-option *ngFor="let opcao of opcoes" [value]="opcao.value">{{opcao.text}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <app-searchbar (searchEvent)="onSearch($event)" width="350px"></app-searchbar>
+      </div>
+
+      <button mat-button class="text-white ml-auto" style="height: 90%" *ngFor="let link of links" routerLink="{{link.url}}">
+        <i class="material-icons">{{link.nomeIcone}}</i>
+        {{link.texto}}
+      </button>
+    </div>
+
+    <button mat-button class="text-white ml-3" (click)="onSair()">
+      <i class="material-icons">logout</i>
+      Sair
+    </button>
+  </div>
+</div>

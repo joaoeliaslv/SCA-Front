@@ -1,0 +1,4 @@
+<app-navbar [ngClass]="{'app-disabled': loading}"></app-navbar>
+
+<div class="w-100 mw-100 bg-light app-main-container" [ngClass]="{'app-disabled': loading}"><router-outlet></router-outlet></div>
+<mat-spinner [hidden]="!loading" class="position-absolute center-absolute"></mat-spinner>

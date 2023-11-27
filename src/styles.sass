@@ -1,0 +1,99 @@
+@import "colors"
+.bigfont
+  font-size: 1.15em
+
+.extrabigfont
+  font-size: 1.8em
+
+.width-fit-content
+  width: fit-content !important
+
+.height-fit-content
+  height: fit-content !important
+
+.unselectable
+  -webkit-touch-callout: none
+  -webkit-user-select: none
+  -khtml-user-select: none
+  -moz-user-select: none
+  -ms-user-select: none
+  user-select: none
+
+.text-align-center
+  text-align: center
+
+.text-align-right
+  text-align: right
+
+.text-align-left
+  text-align: left
+
+.bigicon
+  font-size: 15em
+
+.sm-icon
+  font-size: 3em
+
+.app-outline-primary
+  border: $primary
+  border-style: solid
+  border-width: 2px
+  border-radius: 4px
+
+.app-outline-label
+  margin-bottom: -10px
+  z-index: 999
+
+.app-card
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2)
+
+.app-card:hover
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4)
+
+.top-right-absolute
+  top: 0
+  right: 0
+  margin-top: auto
+  margin-right: auto
+
+.top-absolute
+  top: 0
+  margin-top: auto
+
+.bottom-absolute
+  bottom: 0
+  margin-bottom: auto
+
+.right-absolute
+  right: 0
+  margin-right: auto
+
+.left-absolute
+  left: 0
+  margin-left: auto
+
+.center-absolute
+  @extend .left-absolute
+  @extend .right-absolute
+  @extend .top-absolute
+  @extend .bottom-absolute
+
+.app-disabled
+  pointer-events: none
+  opacity: 0.5
+  background: #CCC
+
+@font-face
+  font-family: 'Material Icons'
+  font-style: normal
+  font-weight: 400
+  src: url(assets/font/MaterialIcons-Regular.ttf)
+
+.pessoa-printable
+  @media print
+    size: A4 portrait
+    margin: 7.5mm 60.5mm 5mm 7.5mm !important
+
+// Final do arquivo
+$primary-app: $primary
+@import "../node_modules/bootstrap/scss/bootstrap"
